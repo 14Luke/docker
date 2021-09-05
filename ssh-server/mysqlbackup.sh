@@ -9,11 +9,11 @@ AWSAK=$5
 AWSSK=$6
 
 
-mysql -u root -h $DBHOST -P 3300 -p $DBPASS $DBNAME > /tmp/$BACKUP
+mysql -u root -h $DBHOST -P 3300 -p $DBPASS $DBNAME > /tmp/$BACKUP && \
 echo "$DBNAME has been dumped and stored !"
 export AWS_ACCESS_KEY_ID=$AWSAK
 export AWS_SECRET_ACCESS_KEY=$AWSSK
-aws cp /tmp/$BACKUP s3://$S3BUK/$BACKUP
+aws s3 cp /tmp/$BACKUP s3://$S3BUK/$BACKUP && \
 echo "$DBNAME backup has been stored on s3 $S3BUK"
 
 
