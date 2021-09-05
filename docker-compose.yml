@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  ubuntujen:
+    image: ubuntussh:v1.0
+    ports:
+      - "2022:22"
+    networks:
+      - jennet
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3300:3306"
+    networks:
+      - jennet
+    env_file:
+      - /root/docker_compose/mysql.env
+    volumes:
+      - /root/container-storage/mysql:/var/lib/mysql
+    external_links:
+      - mysql_jen
+  jenkin:
+    image: jenkins/jenkins
+    ports:
+      - "80:8080"
+      - "50000:50000"
+    volumes:
+      - /root/container-storage/jenkins:/var/jenkins_home
+    networks:
+      - jennet
+networks:
+  jennet:
