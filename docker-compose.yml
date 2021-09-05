@@ -3,7 +3,7 @@ services:
   ubuntujen:
     image: 14lucifer/ubuntu-ssh-server
     build:
-      context: /root/docker_compose
+      context: ssh-server
     ports:
       - "2022:22"
     networks:
